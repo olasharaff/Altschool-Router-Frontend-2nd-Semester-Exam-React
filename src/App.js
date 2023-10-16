@@ -3,10 +3,12 @@ import Home from './pages/Home'
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Contact from "./pages/Contact";
+import ForgotPassword from "./pages/ForgotPassword";
 import Quote from "./pages/Quote";
 import NavBar from "./components/Navbar";
 import ErrorBoundary from "./errorBoundary/ErrorBoundary";
 import { ToastContainer } from "react-toastify";
+
 
 
 
@@ -22,6 +24,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/forget-password" element={<ForgotPassword />} />
           </Routes>
         </Router>
       </ErrorBoundary>
