@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
 import OAuth from '../components/OAuth';
+import {db} from '../firebase';
+
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -9,6 +12,28 @@ export default function SignUp() {
     email: '',
   })
   const {name,  password, email } = formData
+  // create a function for onChange input
+  function handleOnChange(e){
+    setFormData((prevState)=>({
+      ...prevState, [e.target.id]: e.target.value
+    }))
+
+  }
+  // create function for Form onSubmit event
+ async function onSubmitSignUp(e){
+    e.event.preventDefault()
+    try {
+       const auth = getAuth();
+       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+       const user = userCredential.user;
+       console.log(user)
+    } catch (error) {
+      console.log(error)
+      
+    }
+   
+
+  }
   return (
     <>
       <section>
@@ -22,13 +47,14 @@ export default function SignUp() {
             />
           </div>
           <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
-            <form>
+            <form onSubmit={onSubmitSignUp}>
               <input
                 type="text"
                 className="mb-6 w-full text-xl rounded-md transition ease-in-out border-gray-300 bg-white text-gray-500 py-2 px-4"
                 id="name"
                 value={name}
                 placeholder="Full Name"
+                onChange={handleOnChange}
               />
               <input
                 type="email"
@@ -36,6 +62,7 @@ export default function SignUp() {
                 id="email"
                 value={email}
                 placeholder="Email Address"
+                onChange={handleOnChange}
               />
               <div className="relative mb-6">
                 <input
@@ -44,6 +71,7 @@ export default function SignUp() {
                   id="password"
                   value={password}
                   placeholder="password"
+                  onChange={handleOnChange}
                 />
               </div>
               <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg mb-6">
@@ -69,7 +97,7 @@ export default function SignUp() {
               <div className="flex items-center my-4 before:border-t-2 before:flex-1 before:border-gray-400 after:border-t-2 after:flex-1 after:border-gray-400">
                 <p className="text-center font-medium mx-4"> OR </p>
               </div>
-              <OAuth/>
+              <OAuth />
             </form>
           </div>
         </div>

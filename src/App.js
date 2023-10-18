@@ -6,7 +6,7 @@ import Contact from "./pages/Contact";
 import ForgotPassword from "./pages/ForgotPassword";
 import Quote from "./pages/Quote";
 import NavBar from "./components/Navbar";
-import ErrorBoundary from "./errorBoundary/ErrorBoundary";
+// import ErrorBoundary from "./errorBoundary/ErrorBoundary";
 import { ToastContainer } from "react-toastify";
 
 
@@ -15,7 +15,7 @@ import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <>
-      <ErrorBoundary>
+      {/* <ErrorBoundary> */}
         <Router>
           <NavBar />
           <Routes>
@@ -27,7 +27,7 @@ function App() {
             <Route path="/forget-password" element={<ForgotPassword />} />
           </Routes>
         </Router>
-      </ErrorBoundary>
+      {/* </ErrorBoundary> */}
       <ToastContainer
         position="bottom-center"
         autoClose={5000}
