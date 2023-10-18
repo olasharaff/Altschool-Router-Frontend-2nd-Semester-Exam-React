@@ -1,7 +1,5 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { toast } from "react-toastify";
-import Home from "../pages/Home";
-import SignIn from "../pages/SignIn";
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -23,12 +21,7 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
      
-      return <div>
-      <section>
-        <Home/>
-        <SignIn/>
-      </section>
-      </div>;
+      return this.props.fallback
     }
 
     return this.props.children;

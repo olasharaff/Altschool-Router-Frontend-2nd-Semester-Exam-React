@@ -1,31 +1,13 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import useFetchQuote from "../hooks/useFetchQuote";
+import Spinner from "../components/Spinner";
 
 export default function Quote() {
-  const [useQuote, setUseQuote] = useState({});
+  const [useQuote, isLoading] = useFetchQuote()
 
-  useEffect(() => {
-    async function fetchQuote() {
-      try {
-        const response = await axios.get("https://api.kanye.rest");
-        setUseQuote(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    const fetchQuoteTimeout = () => {
-      fetchQuote();
-
-      const timeoutId = setTimeout(() => {
-        fetchQuote();
-      }, 10000);
-
-      return () => clearTimeout(timeoutId);
-    };
-
-    fetchQuoteTimeout();
-  }, []);
+  if(isLoading){
+    return <Spinner/>
+  }
+  
   
 
   return (
