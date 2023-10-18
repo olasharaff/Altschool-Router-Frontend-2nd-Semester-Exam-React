@@ -43,14 +43,14 @@ export default function Home() {
 
           <ul className="sm:grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 ">
             {isBlogs.map((article, index) => (
-              <div className="max-w-[330px] mb-3 mt-3  mr-6 border-2  border-blue-500 px-3 rounded-md hover:shadow-2xl hover:border-blue-700">
+              <div className="max-w-[330px] mb-3 mt-3  mr-6 border-2  border-blue-500 px-3 rounded-md hover:shadow-2xl hover:border-blue-700 active:shadow-[50px]">
                 <li key={index} className="list-none lex flex-col ">
                   <h1 className="font-bold mt-3 text-lg">{article.title}</h1>
                   <Link to={article.url}>
                     <img
                       src={article.urlToImage}
                       alt=""
-                      className="mt-3  hover:scale-90 hover:shadow-lg transition-scale duration-150 ease-out cursor-pointer"
+                      className="mt-3 rounded hover:scale-90 hover:shadow-lg transition-scale duration-150 ease-out cursor-pointer"
                     />
                   </Link>
                   <span className="mt-3">

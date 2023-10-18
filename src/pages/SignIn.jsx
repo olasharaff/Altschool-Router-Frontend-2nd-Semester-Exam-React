@@ -1,13 +1,33 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../components/OAuth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function SignIn() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
   const {email, password} = formData
+  const onChangeSignIn =(e) =>{
+    setFormData((prevState)=>({
+      ...prevState, [e.target.id]: e.target.value
+  }))
+  }
+   async function onSubmitSignIn(e) {
+     e.preventDefault();
+
+     try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      if(userCredential.user) {
+        navigate('/')
+      }
+     } catch (error) {
+      
+     }
+   }
   return (
     <>
       <section>
@@ -21,13 +41,14 @@ export default function SignIn() {
             />
           </div>
           <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
-            <form>
+            <form onSubmit={onSubmitSignIn}>
               <input
                 type="email"
                 className="mb-6 w-full text-xl rounded-md transition ease-in-out border-gray-300 bg-white text-gray-500 py-2 px-4"
                 id="email"
                 value={email}
                 placeholder="Email Address"
+                onChange={onChangeSignIn}
               />
               <div className="relative mb-6">
                 <input
@@ -36,6 +57,7 @@ export default function SignIn() {
                   id="password"
                   value={password}
                   placeholder="password"
+                  onChange={onChangeSignIn}
                 />
               </div>
               <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg mb-6">
@@ -62,7 +84,7 @@ export default function SignIn() {
               <div className="flex items-center my-4 before:border-t-2 before:flex-1 before:border-gray-400 after:border-t-2 after:flex-1 after:border-gray-400">
                 <p className="text-center font-medium mx-4">OR</p>
               </div>
-              <OAuth/>
+              <OAuth />
             </form>
           </div>
         </div>

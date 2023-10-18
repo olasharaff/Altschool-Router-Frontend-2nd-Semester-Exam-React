@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router';
 import logo from '../assets/logo.png'
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 console.log('Logo',logo)
 
 export default function Navbar() {
+  const [isPage, setIsPage] = useState('Sign -in')
+  const auth = getAuth()
+  useEffect(() => {
+    // Track the change in the authentication
+    onAuthStateChanged(auth, (user) => {
+      // if the user exists or authenticated then set the isSetPage(profile)
+      if (user) {
+        setIsPage("Profile");
+      } else {
+        setIsPage("Sign In");
+      }
+    });
+  }, [auth]);
   // create react-router hook  useNavigate and useLocation to navigate and set active  for the navbar link
 
   const navigate = useNavigate()
   const location = useLocation()
   // create function to match the location
-  function PatchMatch(route){
+  function PathMatch(route){
     return route === location.pathname
 
   }
@@ -33,7 +47,7 @@ export default function Navbar() {
               <li
                 onClick={() => navigate("/quote")}
                 className={`cursor-pointer py-4 border-b-4   ${
-                  PatchMatch("/quote")
+                  PathMatch("/quote")
                     ? "text-black border-b-gray-400 cursor-pointer"
                     : "border-transparent"
                 }`}
@@ -43,7 +57,7 @@ export default function Navbar() {
               <li
                 onClick={() => navigate("/contact")}
                 className={`cursor-pointer py-4 border-b-4   ${
-                  PatchMatch("/contact")
+                  PathMatch("/contact")
                     ? "text-black border-b-gray-600 cursor-pointer"
                     : "border-transparent"
                 }`}
@@ -51,14 +65,13 @@ export default function Navbar() {
                 Contact
               </li>
               <li
-                onClick={() => navigate("/sign-in")}
+                onClick={() => navigate("/profile")}
                 className={`cursor-pointer py-4 border-b-4  ${
-                  PatchMatch("/sign-in")
-                    ? "text-black border-b-gray-300 rounded-sm  cursor-pointer"
-                    : "border-transparent"
-                }`}
+                  (PathMatch("/sign-in") || PathMatch("/profile")) &&
+                  "text-black border-b-red-500 cursor-pointer"
+                } :  border-transparent `}
               >
-                Sign In
+                {isPage}
               </li>
             </ul>
           </div>
