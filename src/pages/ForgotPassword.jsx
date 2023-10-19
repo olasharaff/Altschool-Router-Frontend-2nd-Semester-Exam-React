@@ -4,7 +4,7 @@ import OAuth from '../components/OAuth';
 import { ToastContainer } from 'react-toastify';
 
 export default function ForgotPassword() {
-  const [email, setEmail] = useState("");
+  const [email] = useState("");
   return (
     <section>
       <ToastContainer />

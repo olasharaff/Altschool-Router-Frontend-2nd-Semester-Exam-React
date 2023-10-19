@@ -20,7 +20,7 @@ export default function useFetchBlog() {
                },
              }
            );
-           setIsBlogs(response.data.articles.slice(1, 9));
+           setIsBlogs(response.data.articles.slice(1, 11));
            setIsLoading(false)
          } catch (error) {
            console.log(error);

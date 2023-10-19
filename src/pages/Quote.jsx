@@ -12,7 +12,7 @@ export default function Quote() {
 
   return (
     <section className="mt-[13%] px-4">
-      <div className="flex relative justify-center flex-col  mx-auto max-w-sm border-[2px] h-[250px] px-5 py-[50px] items-center border-lime-500 shadow-lg hover:shadow-2xl cursor-pointer transition duration-150 ease-in-out">
+      <div className="flex relative justify-center flex-col  mx-auto max-w-sm border-[2px] h-[250px] px-5 py-[50px] items-center border-lime-500 shadow-lg hover:shadow-2xl cursor-pointer transition duration-150 ease-in-out rounded hover:border-4">
         <q className="py-9 text-center ">
           {useQuote.quote}
         </q>

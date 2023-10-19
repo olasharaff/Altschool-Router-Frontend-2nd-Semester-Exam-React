@@ -8,7 +8,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Quote from "./pages/Quote";
 import NavBar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
-import ErrorBoundary from "./errorBoundary/ErrorBoundary";
+// import ErrorBoundary from "./errorBoundary/ErrorBoundary";
 import { ToastContainer } from "react-toastify";
 import NotFound from "./pages/NotFound";
 
@@ -19,7 +19,7 @@ function App() {
   
   return (
     <>
-      <ErrorBoundary>
+      {/* <ErrorBoundary> */}
       <Router>
         <NavBar />
         <Routes>
@@ -36,7 +36,7 @@ function App() {
           <Route path="*" element={<Navigate to="/404" />} />
         </Routes>
       </Router>
-      </ErrorBoundary>
+      {/* </ErrorBoundary> */}
       <ToastContainer
         position="bottom-center"
         autoClose={5000}

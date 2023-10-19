@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
 import OAuth from '../components/OAuth';
-import {db} from '../firebase';
+
 
 
 export default function SignUp() {
