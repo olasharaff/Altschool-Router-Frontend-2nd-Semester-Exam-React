@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../components/OAuth';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { toast } from 'react-toastify';
+import Spinner from '../components/Spinner';
 
 export default function SignIn() {
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
@@ -19,14 +22,19 @@ export default function SignIn() {
      e.preventDefault();
 
      try {
+      setIsLoading(true)
       const auth = getAuth();
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       if(userCredential.user) {
+        toast.success('successfully signed in')
         navigate('/')
       }
      } catch (error) {
       
      }
+   }
+   if(isLoading){
+    return <Spinner/>
    }
   return (
     <>
@@ -52,7 +60,7 @@ export default function SignIn() {
               />
               <div className="relative mb-6">
                 <input
-                  type="text"
+                  type="password"
                   className="w-full text-xl rounded-md transition ease-in-out border-gray-300 bg-white text-gray-500 py-2 px-4"
                   id="password"
                   value={password}

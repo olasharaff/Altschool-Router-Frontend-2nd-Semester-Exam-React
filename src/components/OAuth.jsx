@@ -1,20 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {FcGoogle} from 'react-icons/fc'
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebase";
 import { toast } from 'react-toastify';
+import Spinner from './Spinner';
 
 
 
 export default function OAuth() {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
   
 
     async function onGoogleClick(){
          try {
-
+          setLoading(true)
       const auth = getAuth() // create a new auth
       const provider = new GoogleAuthProvider(); // create provider method for google authentication
       const result = await signInWithPopup(auth, provider)
@@ -29,18 +31,20 @@ export default function OAuth() {
         await setDoc(docRef, {
           name: user.displayName,
           email: user.email,
-          // photo: user.photoURL,
           timestamp: serverTimestamp()
         })
        
       }
-       navigate("/profile");
-       toast.success("Congratulations, you have successfully registered");
+       navigate("/");
+       toast.success("Successfully logged in");
 
     } catch (error) {
       toast.error('Couldn\'t connect to Google:', error)
     }
     }
+     if (loading) {
+       return <Spinner />;
+     }
   return (
     <button
       type="button"
