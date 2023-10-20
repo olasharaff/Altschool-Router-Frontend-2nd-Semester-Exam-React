@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import { Link, useNavigate } from 'react-router-dom';
+import {getAuth, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth';
 import OAuth from '../components/OAuth';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+import { toast } from 'react-toastify';
+import Spinner from '../components/Spinner';
 
 
 
 export default function SignUp() {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     password: '',
@@ -21,18 +27,33 @@ export default function SignUp() {
   }
   // create function for Form onSubmit event
  async function onSubmitSignUp(e){
-    e.event.preventDefault()
+    e.preventDefault()
     try {
+      setLoading(true)
        const auth = getAuth();
        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
        const user = userCredential.user;
-       console.log(user)
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        });
+      
+        const formDataCopy = { ...formData };
+        delete formDataCopy.password;
+        formDataCopy.timestamp = serverTimestamp();
+
+        await setDoc(doc(db, "users", user.uid), formDataCopy);
+        toast.success('Successfully signed up')
+        navigate('/profile')
+      
     } catch (error) {
-      console.log(error)
+       toast.error("Something went wrong with the registration");
       
     }
    
 
+  }
+  if(loading){
+    return <Spinner/>
   }
   return (
     <>

@@ -38,15 +38,13 @@ The project is organized into distinct folders, each serving a specific purpose:
   - **Spinner.jsx:** Displays loading spinners to enhance user experience.
 
 - **Pages:**
-  - **Home.jsx:** The main landing page of the application.
+  - **Home.jsx:** The main landing page of the application and displays quotes dynamically.
   - **Signin.jsx:** Manages user sign-in functionality.
   - **Signup.jsx:** Facilitates user registration.
   - **ForgetPassword.jsx:** Allows users to recover forgotten passwords.
-  - **Quote.jsx:** Displays quotes dynamically.
   - **NotFound.jsx:** Custom 404 page for handling page not found scenarios.
 
 - **Custom Hooks:**
-  - **useFetchBlog.jsx:** Custom hook for fetching blog-related data.
   - **useFetchQuote.jsx:** Custom hook for fetching quote data.
   - **useAuthStatus.jsx:** Custom hook managing authentication status.
 

@@ -32,9 +32,10 @@ export default function OAuth() {
           // photo: user.photoURL,
           timestamp: serverTimestamp()
         })
-        navigate('/profile')
-        toast.success('Congratulations, you have successfully registered')
+       
       }
+       navigate("/profile");
+       toast.success("Congratulations, you have successfully registered");
 
     } catch (error) {
       toast.error('Couldn\'t connect to Google:', error)

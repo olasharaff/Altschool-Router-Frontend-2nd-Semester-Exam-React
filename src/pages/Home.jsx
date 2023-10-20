@@ -1,17 +1,15 @@
 
 import { Link } from "react-router-dom";
 import {AiOutlineInstagram, AiOutlineLinkedin, AiOutlineTwitter} from 'react-icons/ai'
-import useFetchBlog from "../hooks/useFetchBlog";
 import Spinner from "../components/Spinner";
+import useFetchQuote from "../hooks/useFetchQuote";
 
 export default function Home() {
+const [useQuote, isLoading] = useFetchQuote();
 
-  const [isBlogs, isLoading] = useFetchBlog();
-
-  if(isLoading){
-    return <Spinner/>
-  }
-  
+if (isLoading) {
+  return <Spinner />;
+}
 
   return (
     <section className="mt-10 ">
@@ -39,32 +37,14 @@ export default function Home() {
           </div>
         </div>
         <div className="items-center">
-          <h1 className="text-center font-extrabold text-2xl">Daily News</h1>
+          <h1 className="text-center font-semibold text-2xl mb-3">Quote</h1>
 
-          <ul className="sm:grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 ">
-            {isBlogs.map((article, index) => (
-              <div className="max-w-[330px] mb-3 mt-3  mr-6 border-2  border-blue-500 px-3 rounded-md hover:shadow-2xl hover:border-blue-700 active:shadow-[50px]">
-                <li key={index} className="list-none lex flex-col ">
-                  <h1 className="font-bold mt-3 text-lg">{article.title}</h1>
-                  <Link to={article.url}>
-                    <img
-                      src={article.urlToImage}
-                      alt=""
-                      className="mt-3 rounded hover:scale-90 hover:shadow-lg transition-scale duration-150 ease-out cursor-pointer"
-                    />
-                  </Link>
-                  <span className="mt-3">
-                    {" "}
-                    By <cite className="text-base">{article.author}</cite>
-                  </span>
-                  <article className="mt-3">{article.description}</article>
-                  <button className="border-none bg-blue-300 px-2 py-3 rounded-md my-3 cursor-pointer shadow-sm hover:shadow-lg hover:bg-blue-500">
-                    <Link to={article.url}>Read more......</Link>
-                  </button>
-                </li>
-              </div>
-            ))}
-          </ul>
+          <div className="flex relative justify-center flex-col  mx-auto max-w-sm min-w-full border-[2px] h-[250px] px-5 py-[50px] items-center border-blue-400 shadow-lg hover:shadow-2xl cursor-pointer transition duration-150 ease-in-out rounded hover:border-4">
+            <q className="py-9 text-center ">{useQuote.quote}</q>
+            <div className="flex absolute bottom-4 right-4">
+              <cite className=" font-medium">Kanye West</cite>
+            </div>
+          </div>
         </div>
       </div>
     </section>
