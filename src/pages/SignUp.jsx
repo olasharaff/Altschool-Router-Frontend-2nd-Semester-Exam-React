@@ -76,6 +76,7 @@ export default function SignUp() {
                 value={name}
                 placeholder="Full Name"
                 onChange={handleOnChange}
+                autoComplete='name'
               />
               <input
                 type="email"
@@ -84,6 +85,7 @@ export default function SignUp() {
                 value={email}
                 placeholder="Email Address"
                 onChange={handleOnChange}
+                autoComplete='email'
               />
               <div className="relative mb-6">
                 <input
@@ -93,6 +95,7 @@ export default function SignUp() {
                   value={password}
                   placeholder="password"
                   onChange={handleOnChange}
+                  autoComplete='current-password'
                 />
               </div>
               <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg mb-6">

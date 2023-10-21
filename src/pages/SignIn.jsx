@@ -57,6 +57,7 @@ export default function SignIn() {
                 value={email}
                 placeholder="Email Address"
                 onChange={onChangeSignIn}
+                autoComplete='email'
               />
               <div className="relative mb-6">
                 <input
@@ -66,6 +67,7 @@ export default function SignIn() {
                   value={password}
                   placeholder="password"
                   onChange={onChangeSignIn}
+                  autoComplete='current-password'
                 />
               </div>
               <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg mb-6">

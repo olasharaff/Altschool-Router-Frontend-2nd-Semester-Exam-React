@@ -13,7 +13,7 @@ if (isLoading) {
 
   return (
     <section className="mt-10 ">
-      <div className="flex max-w-6xl justify-center mx-auto px-4 space-x-3 gap-11 relative">
+      <div className="flex max-w-6xl justify-center mx-auto px-4 space-x-3 gap-11 relative flex-wrap">
         <div className="sticky">
           <img
             src="https://media.licdn.com/dms/image/D4D03AQGTFZnFJZ3A4A/profile-displayphoto-shrink_800_800/0/1683621346276?e=2147483647&v=beta&t=PcGRiADjqnQxOCE5uifYVjGnTJ7tsOmSl5syk6_gefk"
@@ -21,9 +21,18 @@ if (isLoading) {
             className="max-w-[200px] rounded-full"
           />
           <h1 className="text-lg ">Sharaf AbdulRahman</h1>
-          <bio>
+          <p>
             I love riding horse, <code>Coding</code> and love Tea ❤️
-          </bio>
+          </p>
+          <div className="my-3">
+            <Link
+              to="https://radiant-shortbread-af2dd2.netlify.app/"
+              className="font-semibold text-base rounded py-2 px-2 bg-blue-400 text-center hover:shadow-2xl transition duration-150 ease-in-out hover:bg-blue-600 transform hover:scale-x-50"
+            >
+              Resume
+            </Link>
+          </div>
+
           <div className="flex space-x-2">
             <Link>
               <AiOutlineInstagram className="text-2xl text-blue-700 cursor-pointer" />
