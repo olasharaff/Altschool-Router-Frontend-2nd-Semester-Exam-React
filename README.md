@@ -37,6 +37,10 @@ The project is organized into distinct folders, each serving a specific purpose:
   - **PrivateRoute.jsx:** Ensures protected routes are accessible only to authenticated users.
   - **Spinner.jsx:** Displays loading spinners to enhance user experience.
 
+- **ErrorBoundary:**
+  - **ErrorBoundary.jsx:** I've utilized the `ErrorBoundary` component to catch errors in my component tree. This ensures a smoother user experience by displaying a friendly error message instead of crashing the application. The `ErrorBoundary` is applied to the entire application in the `App.js` file.
+ 
+    
 - **Pages:**
   - **Home.jsx:** The main landing page of the application and displays quotes dynamically.
   - **Signin.jsx:** Manages user sign-in functionality.
